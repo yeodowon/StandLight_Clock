@@ -1,25 +1,21 @@
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
-
-#pragma once
+#ifndef __CONTROLLER_H__
+#define __CONTROLLER_H__
 
 #include <string>
-#include "View.h"
-
-
-
+#include "Service.h"
+#include "ClockService.h"
 
 class Controller
 {
 private:
     int lightState;
-    View *view;
+    Service *service;
+    ClockService *clockService;
 
 public:
-    Controller(View *viewer);
-    virtual ~Controller(); //virtual 다형성할때 필요
+    Controller(Service *service,  ClockService *clockServ);
+    virtual ~Controller();
     void updateEvent(std::string strBtn);
-
 };
 
-#endif
+#endif /* __CONTROLLER_H__ */

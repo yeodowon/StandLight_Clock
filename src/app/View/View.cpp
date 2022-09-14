@@ -1,72 +1,24 @@
 #include "View.h"
 #include <wiringPi.h>
 
-View::View(Led *Led1, Led *Led2, Led *Led3, Led *Led4, Led *Led5)
+View::View(Led *led1, Led *led2, Led *led3, Led *led4, Led *led5, LCD *Lcd)
 {
-    light1 = Led1;
-    light2 = Led2;
-    light3 = Led3;
-    light4 = Led4;
-    light5 = Led5;
+    light1 = led1;
+    light2 = led2;
+    light3 = led3;
+    light4 = led4;
+    light5 = led5;
     lightState = LIGHT_OFF;
+    this->lcd = Lcd;
 }
 
 View::~View()
 {
 }
 
-void View::updateState(std::string strState)
-{
-    switch (lightState)
-    {
-    case LIGHT_OFF:
-        lightOff();
-        if (strState == "StateOn1")
-        {
-            lightState = LIGHT_ON1;
-        }
-        break;
-
-    case LIGHT_ON1:
-        lightOn1();
-        if (strState == "StateOn2")
-        {
-            lightState = LIGHT_ON2;
-        }
-        break;
-
-    case LIGHT_ON2:
-        lightOn2();
-        if (strState == "StateOn3")
-        {
-            lightState = LIGHT_ON3;
-        }
-        break;
-
-    case LIGHT_ON3:
-        lightOn3();
-        if (strState == "StateOn4")
-        {
-            lightState = LIGHT_ON4;
-        }
-        break;
-
-    case LIGHT_ON4:
-        lightOn4();
-        if (strState == "StateOn5")
-        {
-            lightState = LIGHT_ON5;
-        }
-        break;
-
-    case LIGHT_ON5:
-        lightOn5();
-        if (strState == "StateOff")
-        {
-            lightState = LIGHT_OFF;
-        }
-        break;
-    }
+void View::setState(int state)
+{  
+    lightState = state;
 }
 
 void View::lightView()
@@ -75,58 +27,68 @@ void View::lightView()
     {
     case LIGHT_OFF:
         lightOff();
-
         break;
-
     case LIGHT_ON1:
-        lightOn1();
-
+        lightOn_1();
         break;
-
     case LIGHT_ON2:
-        lightOn2();
-
+        lightOn_2();
         break;
-
     case LIGHT_ON3:
-        lightOn3();
-
+        lightOn_3();
         break;
-
     case LIGHT_ON4:
-        lightOn4();
-
+        lightOn_4();
         break;
-
     case LIGHT_ON5:
-        lightOn5();
-
+        lightOn_5();
         break;
     }
 }
 
-void View::lightOn1()
+
+void View::lightOn_1()
 {
     light1->On();
+    light2->Off();
+    light3->Off();
+    light4->Off();
+    light5->Off();
 }
 
-void View::lightOn2()
+void View::lightOn_2()
 {
+    light1->On();
     light2->On();
+    light3->Off();
+    light4->Off();
+    light5->Off();
 }
 
-void View::lightOn3()
+void View::lightOn_3()
 {
+    light1->On();
+    light2->On();
     light3->On();
+    light4->Off();
+    light5->Off();
 }
 
-void View::lightOn4()
+void View::lightOn_4()
 {
+    light1->On();
+    light2->On();
+    light3->On();
     light4->On();
+    light5->Off();
 }
 
-void View::lightOn5()
+void View::lightOn_5()
 {
+    light1->On();
+    light2->On();
+    light3->On();
+    light4->On();
     light5->On();
 }
 
@@ -138,3 +100,44 @@ void View::lightOff()
     light4->Off();
     light5->Off();
 }
+
+void View::lcdDisplay()
+{
+    char buff[30];
+    sprintf(buff, "Light : %d", lightState);
+    lcd->WriteStringXY(0, 0, buff);
+}
+
+
+void View::lcdView()
+{
+    switch(lightState)
+    {
+        case LIGHT_OFF:
+            lcdDisplay();
+
+        break;
+
+        case LIGHT_ON1:
+            lcdDisplay();
+        break;
+
+        case LIGHT_ON2:
+           lcdDisplay();
+        break;
+
+        case LIGHT_ON3:
+            lcdDisplay();
+        break;
+
+        case LIGHT_ON4:
+           lcdDisplay();
+        break;
+
+        case LIGHT_ON5:
+            lcdDisplay();
+        break;
+    }
+}
+
+        

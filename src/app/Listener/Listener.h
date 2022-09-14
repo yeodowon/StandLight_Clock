@@ -1,21 +1,21 @@
-#ifndef LISTENER_H
-#define LISTENER_H
+#ifndef __LISTENER_H__
+#define __LISTENER_H__
 
-#include "Button.h" //Button에 의존한다.
-#include "Controller.h"  //Led에 의존한다.
-#include<iostream>
-
-#pragma once
+#include "Button.h"
+#include "ClockCheck.h"
+#include "Controller.h"
 
 class Listener
 {
-    private:
-        Button *powerButton;
-        Controller *controller;
-    public:
-        Listener(Button *button, Controller *control); //생성자
-        ~Listener(); //소멸자
-        void checkEvent();
+private :
+    Button *powerButton;
+    ClockCheck *clockCheck;
+    Controller *controller;
+
+public:
+    Listener(Button *button, Controller *control, ClockCheck *clock);
+    ~Listener();
+    void checkEvent();
 };
 
-#endif
+#endif /* __LISTENER_H__ */
