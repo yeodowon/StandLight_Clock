@@ -8,7 +8,6 @@ Service::Service(View *viewer)
 
 Service::~Service()
 {
-
 }
 
 void Service::updateState(std::string strState)
@@ -29,6 +28,11 @@ void Service::updateState(std::string strState)
             lightState = LIGHT_ON2;
             view->setState(lightState);
         }
+        if (strState == "powerButton")
+        {
+            lightState = LIGHT_OFF;
+        }
+        view->setState(lightState);
         break;
 
     case LIGHT_ON2:
@@ -37,6 +41,11 @@ void Service::updateState(std::string strState)
             lightState = LIGHT_ON3;
             view->setState(lightState);
         }
+        if (strState == "powerButton")
+        {
+            lightState = LIGHT_OFF;
+        }
+        view->setState(lightState);
         break;
 
     case LIGHT_ON3:
@@ -45,6 +54,11 @@ void Service::updateState(std::string strState)
             lightState = LIGHT_ON4;
             view->setState(lightState);
         }
+        if (strState == "powerButton")
+        {
+            lightState = LIGHT_OFF;
+        }
+        view->setState(lightState);
         break;
 
     case LIGHT_ON4:
@@ -53,6 +67,11 @@ void Service::updateState(std::string strState)
             lightState = LIGHT_ON5;
             view->setState(lightState);
         }
+        if (strState == "powerButton")
+        {
+            lightState = LIGHT_OFF;
+        }
+        view->setState(lightState);
         break;
 
     case LIGHT_ON5:
@@ -61,6 +80,11 @@ void Service::updateState(std::string strState)
             lightState = LIGHT_OFF;
             view->setState(lightState);
         }
+        if (strState == "powerButton")
+        {
+            lightState = LIGHT_OFF;
+        }
+        view->setState(lightState);
         break;
     }
 }

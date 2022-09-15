@@ -8,8 +8,8 @@ View::View(Led *led1, Led *led2, Led *led3, Led *led4, Led *led5, LCD *Lcd)
     light3 = led3;
     light4 = led4;
     light5 = led5;
-    lightState = LIGHT_OFF;
     this->lcd = Lcd;
+    lightState = LIGHT_OFF;
 }
 
 View::~View()
@@ -17,7 +17,7 @@ View::~View()
 }
 
 void View::setState(int state)
-{  
+{
     lightState = state;
 }
 
@@ -45,7 +45,6 @@ void View::lightView()
         break;
     }
 }
-
 
 void View::lightOn_1()
 {
@@ -108,36 +107,37 @@ void View::lcdDisplay()
     lcd->WriteStringXY(0, 0, buff);
 }
 
-
 void View::lcdView()
 {
-    switch(lightState)
+    switch (lightState)
     {
-        case LIGHT_OFF:
-            lcdDisplay();
+    case LIGHT_OFF:
+        lcdDisplay();
+        lcd->backLightOff();
+        break;
+
+    case LIGHT_ON1:
+        lcdDisplay();
+        lcd->backLightOn();
+        break;
+
+    case LIGHT_ON2:
+        lcdDisplay();
+        break;
+
+    case LIGHT_ON3:
+        lcdDisplay();
 
         break;
 
-        case LIGHT_ON1:
-            lcdDisplay();
+    case LIGHT_ON4:
+        lcdDisplay();
+
         break;
 
-        case LIGHT_ON2:
-           lcdDisplay();
-        break;
+    case LIGHT_ON5:
+        lcdDisplay();
 
-        case LIGHT_ON3:
-            lcdDisplay();
-        break;
-
-        case LIGHT_ON4:
-           lcdDisplay();
-        break;
-
-        case LIGHT_ON5:
-            lcdDisplay();
         break;
     }
 }
-
-        

@@ -13,7 +13,7 @@ private:
     ClockService *clockService;
 
 public:
-    Controller(Service *service,  ClockService *clockServ);
+    Controller(Service *Serv,  ClockService *clockServ);
     virtual ~Controller();
     void updateEvent(std::string strBtn);
 };
